@@ -1,10 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { contact, navLinks, services } from "./data";
 
 export function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return (
@@ -31,25 +34,31 @@ export function Motion() {
       lenis.on("scroll", ScrollTrigger.update);
       const tick = (time: number) => lenis.raf(time * 1000);
       gsap.ticker.add(tick);
-      const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
-      intro
-        .from(".hero-image", { scale: 1.08, duration: 1.7 })
-        .from(
-          ".hero-content > *",
-          { y: 32, opacity: 0, stagger: 0.13, duration: 1 },
-          0.15,
-        )
-        .from(".site-header, .hero-bottom", { opacity: 0, duration: 1 }, 0.7);
-      gsap.to(".hero-image", {
-        yPercent: 15,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
+      // Home and inner pages share the same hero markup: image, shade, content.
+      if (document.querySelector(".hero")) {
+        const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+        intro
+          .from(".hero-image", { scale: 1.08, duration: 1.7 })
+          .from(
+            ".hero-content > *",
+            { y: 32, opacity: 0, stagger: 0.13, duration: 1 },
+            0.15,
+          )
+          .from(".site-header", { opacity: 0, duration: 1 }, 0.7);
+        if (document.querySelector(".hero-bottom")) {
+          intro.from(".hero-bottom", { opacity: 0, duration: 1 }, 0.7);
+        }
+        gsap.to(".hero-image", {
+          yPercent: 15,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
       gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((element) => {
         gsap.from(element, {
           y: 32,
@@ -90,12 +99,7 @@ export function Brand() {
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
-  const links = [
-    ["Our work", "projects"],
-    ["The studio", "studio"],
-    ["What we do", "services"],
-    ["Our process", "process"],
-  ];
+  const pathname = usePathname();
   useEffect(() => {
     if (!menuOpen) return;
     const onEscape = (event: KeyboardEvent) => {
@@ -109,24 +113,32 @@ export function Header() {
   }, [menuOpen]);
   return (
     <header className={`site-header ${menuOpen ? "menu-is-open" : ""}`}>
-      <a
-        href="#home"
+      <Link
+        href="/"
         className="brand"
         aria-label="GetDesigned home"
         onClick={() => setMenuOpen(false)}
       >
         <Brand />
-      </a>
+      </Link>
       <nav aria-label="Main navigation" className="desktop-nav">
-        {links.map(([label, target]) => (
-          <a href={`#${target}`} key={target}>
+        {navLinks.map(({ label, href }) => (
+          <Link
+            href={href}
+            key={href}
+            aria-current={pathname === href ? "page" : undefined}
+          >
             {label}
-          </a>
+          </Link>
         ))}
       </nav>
-      <a className="header-cta" href="#contact">
+      <Link
+        className="header-cta"
+        href="/lets-talk"
+        aria-current={pathname === "/lets-talk" ? "page" : undefined}
+      >
         Let’s talk <Arrow diagonal />
-      </a>
+      </Link>
       <button
         ref={menuButton}
         className={`menu-toggle ${menuOpen ? "is-open" : ""}`}
@@ -144,21 +156,17 @@ export function Header() {
         aria-label="Mobile navigation"
         hidden={!menuOpen}
       >
-        {links.map(([label, target], index) => (
-          <a
-            href={`#${target}`}
-            key={target}
-            onClick={() => setMenuOpen(false)}
-          >
+        {navLinks.map(({ label, href }, index) => (
+          <Link href={href} key={href} onClick={() => setMenuOpen(false)}>
             <span>0{index + 1}</span>
             {label}
             <Arrow diagonal />
-          </a>
+          </Link>
         ))}
-        <a href="#contact" onClick={() => setMenuOpen(false)}>
+        <Link href="/lets-talk" onClick={() => setMenuOpen(false)}>
           <span>05</span>Let’s talk
           <Arrow diagonal />
-        </a>
+        </Link>
       </nav>
     </header>
   );
@@ -287,50 +295,19 @@ export function ProjectGallery() {
                 <li key={detail}>{detail}</li>
               ))}
             </ul>
-            <a
+            <Link
               className="button button-dark"
-              href="#contact"
+              href="/lets-talk"
               onClick={() => dialog.current?.close()}
             >
               Let’s talk about your space <Arrow diagonal />
-            </a>
+            </Link>
           </div>
         </div>
       </dialog>
     </>
   );
 }
-
-const services = [
-  {
-    name: "Space planning",
-    description:
-      "Every good interior begins with a better plan. We study your routines, natural light, circulation, and storage, and explain the reason behind every layout decision.",
-    tags: ["Layouts", "Flow", "Function"],
-    image: "/images/hero-interior.jpg",
-  },
-  {
-    name: "Residential interiors",
-    description:
-      "A home that feels like you. Materials, colour, lighting, and custom furniture brought together into a considered whole, from the kitchen to your favourite quiet corner.",
-    tags: ["Homes", "Materials", "Bespoke furniture"],
-    image: "/images/swing.png",
-  },
-  {
-    name: "Workspace design",
-    description:
-      "Spaces that support the way your team works, balancing focus, collaboration, and a welcoming first impression through purposeful layouts.",
-    tags: ["Offices", "Collaboration", "Comfort"],
-    image: "/images/hero.jpg",
-  },
-  {
-    name: "Design & execution",
-    description:
-      "From drawings to the details you can touch. Our designers and site team carry the design through material selection, coordination, and the finishing touches.",
-    tags: ["Drawings", "Coordination", "Finishing"],
-    image: "/images/living.png",
-  },
-];
 
 export function Services() {
   const list = useRef<HTMLUListElement>(null);
@@ -409,7 +386,7 @@ export function Services() {
       <ul ref={list} className="service-list">
         {services.map((service, index) => (
           <li key={service.name} className="service-item" data-service-row data-reveal>
-            <a href="#contact" className="service-row">
+            <Link href={`/services#${service.id}`} className="service-row">
               <span className="service-number">0{index + 1}</span>
               <h3 className="service-title">{service.name}</h3>
               <div className="service-body">
@@ -427,7 +404,7 @@ export function Services() {
               <span className="service-arrow" aria-hidden="true">
                 <Arrow diagonal />
               </span>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
@@ -439,5 +416,134 @@ export function Services() {
         ))}
       </div>
     </>
+  );
+}
+
+const spaceTypes = ["Apartment", "Independent home", "Villa", "Office", "Commercial", "Other"];
+const budgets = ["Under ₹10 lakh", "₹10–25 lakh", "₹25–50 lakh", "₹50 lakh+", "Not sure yet"];
+const timelines = ["As soon as possible", "In 1–3 months", "In 3–6 months", "Just exploring"];
+
+// No backend yet: the enquiry is composed into an email the visitor sends from their own mail app.
+export function EnquiryForm() {
+  const [sent, setSent] = useState(false);
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const field = (key: string) => String(data.get(key) ?? "").trim();
+    const wanted = data.getAll("services").map(String);
+    const body = [
+      `Name: ${field("name")}`,
+      `Phone: ${field("phone")}`,
+      `Email: ${field("email")}`,
+      `Space: ${field("space") || "Not specified"}`,
+      `Location / area: ${field("location") || "Not specified"}`,
+      `Looking for: ${wanted.length ? wanted.join(", ") : "Not specified"}`,
+      `Budget: ${field("budget") || "Not specified"}`,
+      `Timeline: ${field("timeline") || "Not specified"}`,
+      "",
+      field("message"),
+    ].join("\n");
+    const subject = `New enquiry from ${field("name")}`;
+    window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setSent(true);
+  };
+
+  return (
+    <form className="enquiry-form" onSubmit={onSubmit}>
+      <fieldset>
+        <legend>
+          <span>01</span> About you
+        </legend>
+        <div className="field-row">
+          <label className="field">
+            <span>Your name</span>
+            <input name="name" autoComplete="name" required />
+          </label>
+          <label className="field">
+            <span>Phone</span>
+            <input name="phone" type="tel" autoComplete="tel" required />
+          </label>
+        </div>
+        <label className="field">
+          <span>Email</span>
+          <input name="email" type="email" autoComplete="email" />
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>
+          <span>02</span> Your space
+        </legend>
+        <div className="chip-group" role="radiogroup" aria-label="Type of space">
+          {spaceTypes.map((type) => (
+            <label className="chip" key={type}>
+              <input type="radio" name="space" value={type} />
+              <span>{type}</span>
+            </label>
+          ))}
+        </div>
+        <label className="field">
+          <span>Location & approximate size</span>
+          <input name="location" placeholder="e.g. Kokapet, 3 BHK, 1,800 sq ft" />
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>
+          <span>03</span> What you need
+        </legend>
+        <div className="chip-group">
+          {services.map((service) => (
+            <label className="chip" key={service.id}>
+              <input type="checkbox" name="services" value={service.name} />
+              <span>{service.name}</span>
+            </label>
+          ))}
+        </div>
+        <div className="field-row">
+          <label className="field">
+            <span>Budget</span>
+            <select name="budget" defaultValue="">
+              <option value="" disabled>
+                Select a range
+              </option>
+              {budgets.map((b) => (
+                <option key={b}>{b}</option>
+              ))}
+            </select>
+          </label>
+          <label className="field">
+            <span>Timeline</span>
+            <select name="timeline" defaultValue="">
+              <option value="" disabled>
+                When would you like to start?
+              </option>
+              {timelines.map((t) => (
+                <option key={t}>{t}</option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <label className="field">
+          <span>Tell us about it</span>
+          <textarea
+            name="message"
+            rows={5}
+            placeholder="How do you live in the space today? What would you change?"
+          />
+        </label>
+      </fieldset>
+
+      <div className="form-submit">
+        <button className="button button-dark" type="submit">
+          Send enquiry <Arrow diagonal />
+        </button>
+        <p aria-live="polite">
+          {sent
+            ? "Your email app should open with the details filled in. Just press send."
+            : "We usually reply within one working day."}
+        </p>
+      </div>
+    </form>
   );
 }

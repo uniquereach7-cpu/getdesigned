@@ -6,14 +6,22 @@ Project, founder, and workspace photographs were sourced from the client's exist
 - `dining.png`: https://www.getdesigned.in/img/project/dining.png
 - `living.png`: https://www.getdesigned.in/img/project/p1.png
 - `founder.jpg`: https://www.getdesigned.in/img/team/samanvita.jpeg
-- `hero.jpg` (workspace service): https://www.getdesigned.in/img/hero/hero-1.jpg
+- `hero.jpg` (no longer used): https://www.getdesigned.in/img/hero/hero-1.jpg
+- `kitchen.jpg`: https://www.getdesigned.in/img/project/kitchen.png
+- `shelving.jpg`: https://www.getdesigned.in/img/project/p5.png
+- `crockery.jpg`: https://www.getdesigned.in/img/project/sa_crockery.png
+- `washbasin.jpg`: https://www.getdesigned.in/img/project/washbasin.png
 
 Stock photographs used for visual direction, not presented as GetDesigned projects:
 
 - `hero-warm.jpg`: https://unsplash.com/photos/a-modern-living-room-with-warm-wood-paneling-Cio7d2EK1vs (free Unsplash license)
+- `workspace.jpg` (workspace service): https://unsplash.com/photos/modern-office-workspace-with-two-people--8DAN9_oi8g (free Unsplash license)
+- `about-hero.jpg` (About hero): https://unsplash.com/photos/modern-living-room-with-tan-leather-chairs-and-fireplace-CCQi3pV95k0 (free Unsplash license)
+- `materials.jpg` (Services hero): https://unsplash.com/photos/assortment-of-various-wood-and-stone-samples-apJMCEBNucw (free Unsplash license)
+- `bedroom.jpg` (Let's talk hero): https://unsplash.com/photos/a-neutral-bedroom-with-a-large-bed-and-wooden-wardrobe-Xbe5BfScmvM (free Unsplash license)
 - `hero-interior.jpg`: https://www.pexels.com/photo/modern-living-room-with-wooden-coffee-table-30440152/ (Pexels license)
 
-Project titles are editorial descriptions, not verified client/project names. Design notes describe visible details. Business contact information and founder name are from the existing website. Process and positioning copy are proposed copy based on the supplied brief and should be reviewed by the studio before launch.
+Project titles are editorial descriptions, not verified client/project names. Design notes describe visible details. Business contact information and founder name are from the existing website. About, mission, vision, founder, service lists, and stats are adapted from the existing website. FAQ answers, budget ranges, reply-time promise, process and positioning copy are proposed copy based on the supplied brief and should be reviewed by the studio before launch.
 
 ## Revised hero concept
 

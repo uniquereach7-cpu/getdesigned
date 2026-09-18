@@ -1,20 +1,12 @@
 import Image from "next/image";
+import Link from "next/link";
 
-import {
-  Arrow,
-  Brand,
-  Header,
-  Motion,
-  ProjectGallery,
-  Services,
-} from "./experience";
+import { Arrow, Header, Motion, ProjectGallery, Services } from "./experience";
+import { ClosingCTA, ProcessSteps } from "./site";
 
 export default function Home() {
   return (
     <>
-      <a className="skip-link" href="#main-content">
-        Skip to content
-      </a>
       <Motion />
       <main id="home">
         <section
@@ -118,13 +110,13 @@ export default function Home() {
                   <strong>Samanvita Reddy</strong>
                   <span>Founder & CEO</span>
                 </div>
-                <a
-                  href="#contact"
+                <Link
+                  href="/about"
                   className="round-arrow"
-                  aria-label="Talk to the studio"
+                  aria-label="More about the studio"
                 >
                   <Arrow diagonal />
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -163,9 +155,9 @@ export default function Home() {
             <ProjectGallery />
             <div className="projects-footnote">
               <span>REAL SPACES. REAL DETAILS. THE GETDESIGNED PORTFOLIO.</span>
-              <a href="#contact" className="text-link">
+              <Link href="/lets-talk" className="text-link">
                 Your space could be next <Arrow diagonal />
-              </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -188,6 +180,12 @@ export default function Home() {
             </p>
           </div>
           <Services />
+          <div className="services-footnote" data-reveal>
+            <span>EVERY DECISION, EXPLAINED. EVERY SPACE, PLANNED FOR YOU.</span>
+            <Link href="/services" className="text-link">
+              Explore our services <Arrow diagonal />
+            </Link>
+          </div>
         </section>
 
         <section className="process-section" id="process">
@@ -208,146 +206,12 @@ export default function Home() {
                 And you at the centre of it all.
               </p>
             </div>
-            <div className="process-grid">
-              {[
-                {
-                  number: "01",
-                  title: "First, we listen.",
-                  description:
-                    "Your routines, your wish list, your budget. We get to know what matters to you before we put pen to paper.",
-                  note: "DISCOVERY & BRIEF",
-                },
-                {
-                  number: "02",
-                  title: "Then, we question.",
-                  description:
-                    "We explore layouts and possibilities. Every choice comes with a why, so you understand how your space will work.",
-                  note: "PLANNING & CONCEPT",
-                },
-                {
-                  number: "03",
-                  title: "Together, we refine.",
-                  description:
-                    "Materials, light, colour, and custom details. We develop the design with you until it feels right.",
-                  note: "DESIGN & DETAILING",
-                },
-                {
-                  number: "04",
-                  title: "Finally, it’s yours.",
-                  description:
-                    "Our design and execution teams bring the details together, carrying the vision through to the finished space.",
-                  note: "EXECUTION & HANDOVER",
-                },
-              ].map((step) => (
-                <article className="process-step" key={step.number} data-reveal>
-                  <div className="step-top">
-                    <span>{step.number}</span>
-                    <Arrow />
-                  </div>
-                  <h3>{step.title}</h3>
-                  <p>{step.description}</p>
-                  <span className="step-note">{step.note}</span>
-                </article>
-              ))}
-            </div>
+            <ProcessSteps />
           </div>
         </section>
 
-        <section className="contact-section" id="contact">
-          <div className="contact-image">
-            <Image
-              src="/images/hero-warm.jpg"
-              alt="Warm wood and comfortable seating in an inviting interior"
-              fill
-              sizes="100vw"
-            />
-          </div>
-          <div className="contact-overlay" />
-          <div className="contact-content" data-reveal>
-            <span className="eyebrow">
-              <span className="tiny-dot" /> YOUR SPACE. A NEW PERSPECTIVE.
-            </span>
-            <h2>
-              Let’s make room
-              <br />
-              for <em>your kind of living.</em>
-            </h2>
-            <p>
-              Have a space in mind? Tell us what you’re imagining.
-              <br />
-              We’ll take it from there, together.
-            </p>
-            <a
-              className="button button-light"
-              href="mailto:getdesigned26@gmail.com?subject=Let%E2%80%99s%20talk%20about%20my%20space"
-            >
-              Start a conversation <Arrow diagonal />
-            </a>
-            <a className="contact-phone" href="tel:+919000297018">
-              Or give us a call: +91 90002 97018
-            </a>
-          </div>
-        </section>
+        <ClosingCTA />
       </main>
-      <footer className="footer">
-        <div className="footer-main">
-          <div className="footer-brand">
-            <a href="#home" className="brand" aria-label="GetDesigned home">
-              <Brand />
-            </a>
-            <p>
-              Thoughtful spaces.
-              <br />
-              Made for the way you live.
-            </p>
-          </div>
-          <div>
-            <span className="footer-label">COME SAY HELLO</span>
-            <address>
-              Flat 301, Sri Ramaramam Building,
-              <br />
-              Narsingi, Hyderabad,
-              <br />
-              Telangana 500075.
-            </address>
-            <a
-              className="text-link"
-              href="https://www.google.com/maps/search/?api=1&query=GetDesigned+Narsingi+Hyderabad"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Get directions <Arrow diagonal />
-            </a>
-          </div>
-          <div>
-            <span className="footer-label">LET’S CONNECT</span>
-            <a href="mailto:getdesigned26@gmail.com">getdesigned26@gmail.com</a>
-            <a href="tel:+919000297018">+91 90002 97018</a>
-            <a
-              className="text-link"
-              href="https://wa.me/919000297018"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Say hello on WhatsApp <Arrow diagonal />
-            </a>
-          </div>
-          <div className="footer-nav">
-            <span className="footer-label">EXPLORE</span>
-            <a href="#projects">Our work</a>
-            <a href="#studio">The studio</a>
-            <a href="#services">What we do</a>
-            <a href="#process">Our process</a>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <span>
-            © {new Date().getFullYear()} GetDesigned. All rights reserved.
-          </span>
-          <span>BASED IN HYDERABAD. DESIGNED AROUND YOU.</span>
-          <a href="#home">Back to top ↑</a>
-        </div>
-      </footer>
     </>
   );
 }
