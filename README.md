@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GetDesigned
 
-## Getting Started
+A responsive interior design studio website built in Next.js and TSX. The visual direction pairs warm ivory and espresso with architectural photography, editorial typography, and restrained animation.
 
-First, run the development server:
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open the local URL printed by Next.js.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Checks
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+```
 
-## Learn More
+## Editing
 
-To learn more about Next.js, take a look at the following resources:
+- `app/page.tsx`: homepage content, studio story, process, and contact information.
+- `app/experience.tsx`: navigation, project galleries, service accordion, and Lenis/GSAP motion.
+- `app/globals.css`: palette, typography, layouts, responsive breakpoints, and reduced-motion styles.
+- `app/layout.tsx`: page metadata.
+- `public/images/`: locally stored photography.
+- `IMAGE-SOURCES.md`: photo credits, provenance, and content-review notes.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Project cards open accessible native dialogs. The navigation and services work with a keyboard. Animation follows the visitor’s reduced-motion preference. Contact actions use the studio’s existing email, phone, and WhatsApp; there is no form backend.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This is a local implementation. Review the proposed copy and temporary stock imagery before publishing it as the client’s production website.
