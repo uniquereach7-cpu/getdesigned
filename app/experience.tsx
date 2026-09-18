@@ -305,89 +305,139 @@ const services = [
   {
     name: "Space planning",
     description:
-      "Every good interior begins with a better plan. We study your routines, natural light, circulation, and storage needs to make each square foot work harder for you.",
-    tags: "LAYOUTS · FLOW · FUNCTION",
+      "Every good interior begins with a better plan. We study your routines, natural light, circulation, and storage, and explain the reason behind every layout decision.",
+    tags: ["Layouts", "Flow", "Function"],
     image: "/images/hero-interior.jpg",
-    alt: "Considered arrangement of cream seating, wooden tables, and natural light",
   },
   {
     name: "Residential interiors",
     description:
-      "A home that feels like you. We bring materials, colour, lighting, and custom furniture together into a considered whole, from the kitchen to your favourite quiet corner.",
-    tags: "HOMES · MATERIALS · BESPOKE FURNITURE",
+      "A home that feels like you. Materials, colour, lighting, and custom furniture brought together into a considered whole, from the kitchen to your favourite quiet corner.",
+    tags: ["Homes", "Materials", "Bespoke furniture"],
     image: "/images/swing.png",
-    alt: "Custom cane and timber swing in a residential interior",
   },
   {
     name: "Workspace design",
     description:
-      "Spaces that support the way your team works. We balance focused work, collaboration, and a welcoming first impression through purposeful layouts and thoughtful interiors.",
-    tags: "OFFICES · COLLABORATION · COMFORT",
+      "Spaces that support the way your team works, balancing focus, collaboration, and a welcoming first impression through purposeful layouts.",
+    tags: ["Offices", "Collaboration", "Comfort"],
     image: "/images/hero.jpg",
-    alt: "Glass-partitioned workspace with a lounge and open circulation",
   },
   {
     name: "Design & execution",
     description:
-      "From drawings to the details you can touch. Our designers and implementation team work together to carry the design through material selection, coordination, and the finishing touches.",
-    tags: "DRAWINGS · COORDINATION · FINISHING",
+      "From drawings to the details you can touch. Our designers and site team carry the design through material selection, coordination, and the finishing touches.",
+    tags: ["Drawings", "Coordination", "Finishing"],
     image: "/images/living.png",
-    alt: "Detailed stone installation with integrated feature lighting",
   },
 ];
 
 export function Services() {
-  const [active, setActive] = useState<number | null>(0);
+  const list = useRef<HTMLUListElement>(null);
+  const preview = useRef<HTMLDivElement>(null);
+
+  // Fine pointers: a floating preview follows the cursor and cross-fades between services.
+  useEffect(() => {
+    const media = gsap.matchMedia();
+    media.add(
+      "(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
+      () => {
+        const box = preview.current!;
+        const listEl = list.current!;
+        const rows = gsap.utils.toArray<HTMLElement>("[data-service-row]", listEl);
+        const imgs = gsap.utils.toArray<HTMLElement>("[data-preview-img]", box);
+        const xTo = gsap.quickTo(box, "x", { duration: 0.6, ease: "power3.out" });
+        const yTo = gsap.quickTo(box, "y", { duration: 0.6, ease: "power3.out" });
+        const rTo = gsap.quickTo(box, "rotation", { duration: 0.8, ease: "power3.out" });
+        let lastX = 0;
+        let active = -1;
+
+        gsap.set(box, { xPercent: -50, yPercent: -50, scale: 0.6, opacity: 0 });
+        gsap.set(imgs, { opacity: 0 });
+
+        const show = (i: number) => {
+          if (i === active) return;
+          active = i;
+          imgs.forEach((img, j) =>
+            gsap.to(img, {
+              opacity: j === i ? 1 : 0,
+              scale: j === i ? 1 : 1.08,
+              duration: 0.5,
+              ease: "power2.out",
+            }),
+          );
+        };
+        const onMove = (e: PointerEvent) => {
+          xTo(e.clientX);
+          yTo(e.clientY);
+          rTo(gsap.utils.clamp(-6, 6, (e.clientX - lastX) * 0.4));
+          lastX = e.clientX;
+        };
+        const onEnter = (e: PointerEvent) => {
+          gsap.set(box, { x: e.clientX, y: e.clientY });
+          lastX = e.clientX;
+          gsap.to(box, { scale: 1, opacity: 1, duration: 0.5, ease: "power3.out" });
+        };
+        const onLeave = () => {
+          active = -1;
+          gsap.to(box, { scale: 0.6, opacity: 0, duration: 0.4, ease: "power3.out" });
+        };
+        const rowHandlers = rows.map((row, i) => {
+          const handler = () => show(i);
+          row.addEventListener("pointerenter", handler);
+          return handler;
+        });
+
+        listEl.addEventListener("pointermove", onMove);
+        listEl.addEventListener("pointerenter", onEnter);
+        listEl.addEventListener("pointerleave", onLeave);
+        return () => {
+          listEl.removeEventListener("pointermove", onMove);
+          listEl.removeEventListener("pointerenter", onEnter);
+          listEl.removeEventListener("pointerleave", onLeave);
+          rows.forEach((row, i) =>
+            row.removeEventListener("pointerenter", rowHandlers[i]),
+          );
+        };
+      },
+    );
+    return () => media.revert();
+  }, []);
+
   return (
-    <div className="services-layout">
-      <div className="service-visual" data-reveal>
-        <Image
-          key={active ?? 0}
-          src={services[active ?? 0].image}
-          alt={services[active ?? 0].alt}
-          fill
-          sizes="(max-width: 650px) 90vw, 42vw"
-        />
-        <span className="image-note">
-          THOUGHT THROUGH. BEAUTIFULLY REALISED.
-        </span>
-      </div>
-      <div className="service-list" data-reveal>
+    <>
+      <ul ref={list} className="service-list">
         {services.map((service, index) => (
-          <div
-            className={`service-item ${active === index ? "active" : ""}`}
-            key={service.name}
-          >
-            <h3>
-              <button
-                aria-expanded={active === index}
-                aria-controls={`service-panel-${index}`}
-                id={`service-button-${index}`}
-                onClick={() => setActive(active === index ? null : index)}
-              >
-                <span className="service-number">0{index + 1}</span>
-                <span>{service.name}</span>
-                <span className="service-plus" aria-hidden="true">
-                  {active === index ? "−" : "+"}
-                </span>
-              </button>
-            </h3>
-            <div
-              className="service-description"
-              id={`service-panel-${index}`}
-              role="region"
-              aria-labelledby={`service-button-${index}`}
-              hidden={active !== index}
-            >
-              <p>{service.description}</p>
-              <p className="service-tags">{service.tags}</p>
-              <a href="#contact" className="text-link">
-                Discuss your space <Arrow diagonal />
-              </a>
-            </div>
+          <li key={service.name} className="service-item" data-service-row data-reveal>
+            <a href="#contact" className="service-row">
+              <span className="service-number">0{index + 1}</span>
+              <h3 className="service-title">{service.name}</h3>
+              <div className="service-body">
+                <p>{service.description}</p>
+                <p className="service-tags">{service.tags.join(" · ")}</p>
+              </div>
+              <div className="service-thumb">
+                <Image
+                  src={service.image}
+                  alt=""
+                  fill
+                  sizes="(max-width: 650px) 90vw, 40vw"
+                />
+              </div>
+              <span className="service-arrow" aria-hidden="true">
+                <Arrow diagonal />
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div ref={preview} className="service-preview" aria-hidden="true">
+        {services.map((service) => (
+          <div key={service.name} className="service-preview-img" data-preview-img>
+            <Image src={service.image} alt="" fill sizes="340px" />
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 }

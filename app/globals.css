@@ -478,85 +478,195 @@ h2 em {
 .text-link:hover svg {
   transform: translate(2px, -2px);
 }
-.services-layout {
-  display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  gap: 8%;
-  align-items: start;
-}
-.service-visual {
-  height: 490px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 3px;
-  background: #d8cfc3;
-}
-.service-visual img {
-  object-fit: cover;
-  animation: image-enter 0.55s ease both;
-}
-.image-note {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  right: 20px;
-  color: white;
-  font-size: 8px;
-  letter-spacing: 1.4px;
-  text-shadow: 0 1px 8px #000;
-  background: #302b2670;
-  padding: 12px;
-  width: fit-content;
+.service-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--line);
 }
 .service-item {
   border-top: 1px solid var(--line);
 }
-.service-item:last-child {
-  border-bottom: 1px solid var(--line);
-}
-.service-item h3 button {
-  width: 100%;
-  display: flex;
+.service-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 70px minmax(0, 1fr) minmax(0, 1.1fr) 52px;
+  gap: 32px;
   align-items: center;
-  text-align: left;
-  gap: 22px;
-  background: none;
-  border: 0;
-  padding: 28px 0;
-  color: var(--ink);
-  font-size: 24px;
-  letter-spacing: -0.7px;
-  font-weight: 400;
+  padding: 40px 0;
+  isolation: isolate;
+}
+.service-row::before {
+  content: "";
+  position: absolute;
+  inset: 0 -24px;
+  z-index: -1;
+  background: var(--soft);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1);
 }
 .service-number {
   font-size: 11px;
-  letter-spacing: 0;
-  color: var(--muted);
-  min-width: 21px;
-}
-.service-plus {
-  margin-left: auto;
-  font-size: 25px;
-  color: var(--muted);
-  font-weight: 300;
-}
-.service-item.active h3 button {
-  color: var(--accent);
-}
-.service-description {
-  padding: 0 0 32px 43px;
-}
-.service-description > p {
-  font-size: 16px;
-  line-height: 1.9;
-  color: var(--muted);
-}
-.service-description .service-tags {
-  font-size: 9px;
   letter-spacing: 1px;
-  margin-top: 22px;
-  margin-bottom: 22px;
+  color: var(--muted);
+  transition: color 0.4s;
+}
+.service-title {
+  margin: 0;
+  font-size: clamp(26px, 3vw, 44px);
+  font-weight: 400;
+  letter-spacing: -1.2px;
+  line-height: 1.05;
+  transition:
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.4s;
+}
+.service-body p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.service-body .service-tags {
+  margin-top: 14px;
+  font-size: 9px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
   color: var(--accent);
+}
+.service-thumb {
+  display: none;
+}
+.service-thumb img {
+  object-fit: cover;
+}
+.service-arrow {
+  justify-self: end;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink);
+  transition:
+    background 0.4s,
+    border-color 0.4s,
+    color 0.4s,
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.service-arrow svg {
+  width: 16px;
+  height: 16px;
+}
+.service-row:hover::before,
+.service-row:focus-visible::before {
+  transform: scaleY(1);
+  transform-origin: top;
+}
+.service-row:hover .service-title,
+.service-row:focus-visible .service-title {
+  color: var(--accent);
+  transform: translateX(18px);
+}
+.service-row:hover .service-number,
+.service-row:focus-visible .service-number {
+  color: var(--accent);
+}
+.service-row:hover .service-arrow,
+.service-row:focus-visible .service-arrow {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+  transform: rotate(45deg);
+}
+.service-preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  width: 300px;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 3px;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: 0 30px 60px -20px #302b2666;
+}
+.service-preview-img {
+  position: absolute;
+  inset: 0;
+}
+.service-preview-img img {
+  object-fit: cover;
+}
+@media (hover: none), (pointer: coarse) {
+  .service-preview {
+    display: none;
+  }
+}
+@media (max-width: 1050px) {
+  .service-row {
+    grid-template-columns: 50px minmax(0, 1fr) minmax(0, 1.2fr) 44px;
+    gap: 24px;
+  }
+  .service-arrow {
+    width: 44px;
+    height: 44px;
+  }
+}
+@media (max-width: 900px), (hover: none) {
+  .service-row {
+    grid-template-columns: 40px minmax(0, 1fr) 44px;
+    grid-template-areas:
+      "num title arrow"
+      ". body body"
+      ". thumb thumb";
+    row-gap: 18px;
+    align-items: start;
+    padding: 32px 0;
+  }
+  .service-number {
+    grid-area: num;
+    padding-top: 10px;
+  }
+  .service-title {
+    grid-area: title;
+    align-self: center;
+  }
+  .service-body {
+    grid-area: body;
+  }
+  .service-arrow {
+    grid-area: arrow;
+  }
+  .service-thumb {
+    grid-area: thumb;
+    display: block;
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 3px;
+    margin-top: 6px;
+  }
+  .service-row::before {
+    inset: 0 -12px;
+  }
+}
+@media (max-width: 650px) {
+  .service-row {
+    grid-template-columns: 30px minmax(0, 1fr) 40px;
+    gap: 14px;
+    row-gap: 16px;
+  }
+  .service-title {
+    font-size: 25px;
+  }
+  .service-arrow {
+    width: 40px;
+    height: 40px;
+  }
 }
 .process-section {
   background: #eae5db;
@@ -863,15 +973,6 @@ body:has(dialog[open]) {
     width: 30px;
     height: 30px;
   }
-  .services-layout {
-    gap: 6%;
-  }
-  .service-item h3 button {
-    font-size: 21px;
-  }
-  .service-visual {
-    height: 460px;
-  }
   .process-step {
     padding: 0 20px;
   }
@@ -935,16 +1036,6 @@ body:has(dialog[open]) {
   }
   .step-note {
     margin-top: 20px;
-  }
-  .service-visual {
-    height: 450px;
-  }
-  .service-item h3 button {
-    font-size: 19px;
-    gap: 15px;
-  }
-  .service-description {
-    padding-left: 36px;
   }
   .dialog-copy {
     padding: 65px 28px 35px;
@@ -1049,21 +1140,6 @@ body:has(dialog[open]) {
   }
   .projects-footnote .text-link {
     margin-top: 22px;
-  }
-  .services-layout {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-  .service-visual {
-    height: 330px;
-  }
-  .service-item h3 button {
-    font-size: 22px;
-    padding: 24px 0;
-    gap: 18px;
-  }
-  .service-description {
-    padding-left: 39px;
   }
   .process-section .section {
     padding: 70px 25px;
