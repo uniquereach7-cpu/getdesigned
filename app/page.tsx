@@ -1,6 +1,13 @@
 import Image from "next/image";
 
-import { Arrow, Header, Motion, ProjectGallery, Services } from "./experience";
+import {
+  Arrow,
+  Brand,
+  Header,
+  Motion,
+  ProjectGallery,
+  Services,
+} from "./experience";
 
 export default function Home() {
   return (
@@ -8,7 +15,6 @@ export default function Home() {
       <a className="skip-link" href="#main-content">
         Skip to content
       </a>
-      <Header />
       <Motion />
       <main id="home">
         <section
@@ -16,35 +22,26 @@ export default function Home() {
           className="hero"
           aria-labelledby="hero-heading"
         >
+          <Header />
           <div className="hero-image">
             <Image
-              src="/images/hero-warm.jpg"
-              alt="Warm timber interiors with soft cream seating and sculptural lighting"
+              src="/images/hero-architecture.webp"
+              alt="Architectural concept: a sunlit double-height living room with curved plaster walls, walnut, and sculptural cream seating"
               fill
               preload
               sizes="100vw"
             />
           </div>
           <div className="hero-shade" />
-          <div className="hero-topline">
-            <span className="eyebrow">
-              <span className="tiny-dot" /> INTERIORS WITH INTENTION
-            </span>
-            <span className="hero-location">HYDERABAD, INDIA</span>
-          </div>
           <div className="hero-content">
-            <p className="hero-kicker">
-              A little thought. A different way to live.
-            </p>
+            <p className="hero-kicker">CONSIDERED SPACES. DISTINCTLY YOU.</p>
             <h1 id="hero-heading">
-              Beautiful spaces.
+              Spaces with soul.
               <br />
-              <em>Thoughtfully yours.</em>
+              <em>Designed around you.</em>
             </h1>
-            <p>
-              Beyond the way it looks. We design around the way you live,
-              <br className="desktop-break" /> with a reason behind every
-              detail.
+            <p className="hero-description">
+              A reason behind every detail. A place for the way you live.
             </p>
             <a href="#projects" className="button button-light">
               Explore our work <Arrow diagonal />
@@ -54,7 +51,9 @@ export default function Home() {
             <a href="#studio" className="scroll-link">
               <span className="scroll-circle">↓</span> SCROLL TO DISCOVER
             </a>
-            <span>SPACE PLANNING · INTERIOR DESIGN · EXECUTION</span>
+            <span className="hero-location">
+              INTERIOR DESIGN STUDIO · HYDERABAD
+            </span>
           </div>
         </section>
         <div className="belief-strip">
@@ -294,11 +293,7 @@ export default function Home() {
         <div className="footer-main">
           <div className="footer-brand">
             <a href="#home" className="brand" aria-label="GetDesigned home">
-              <span className="brand-mark" aria-hidden="true" />
-              <span>
-                get<span className="brand-light">designed</span>
-                <span className="brand-dot">.</span>
-              </span>
+              <Brand />
             </a>
             <p>
               Thoughtful spaces.

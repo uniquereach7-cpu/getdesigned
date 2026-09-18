@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  icons: { icon: "/assets/logo.png", apple: "/assets/logo.png" },
   title: "GetDesigned — Thoughtful Interiors, Hyderabad",
   description:
     "Considered space planning, bespoke interiors, and execution in Hyderabad. GetDesigned creates spaces around the way you live, with a reason behind every detail.",

@@ -39,7 +39,7 @@ export function Motion() {
           { y: 32, opacity: 0, stagger: 0.13, duration: 1 },
           0.15,
         )
-        .from(".hero-topline, .hero-bottom", { opacity: 0, duration: 1 }, 0.7);
+        .from(".site-header, .hero-bottom", { opacity: 0, duration: 1 }, 0.7);
       gsap.to(".hero-image", {
         yPercent: 15,
         ease: "none",
@@ -69,6 +69,24 @@ export function Motion() {
   return null;
 }
 
+export function Brand() {
+  return (
+    <>
+      <Image
+        className="brand-logo"
+        src="/assets/logo.png"
+        alt=""
+        width={32}
+        height={40}
+      />
+      <span className="brand-name">
+        GetDesigned
+        <span className="brand-descriptor">INTERIOR DESIGN STUDIO</span>
+      </span>
+    </>
+  );
+}
+
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
@@ -90,18 +108,14 @@ export function Header() {
     return () => window.removeEventListener("keydown", onEscape);
   }, [menuOpen]);
   return (
-    <header className="site-header">
+    <header className={`site-header ${menuOpen ? "menu-is-open" : ""}`}>
       <a
         href="#home"
         className="brand"
         aria-label="GetDesigned home"
         onClick={() => setMenuOpen(false)}
       >
-        <span className="brand-mark" aria-hidden="true" />
-        <span>
-          get<span className="brand-light">designed</span>
-          <span className="brand-dot">.</span>
-        </span>
+        <Brand />
       </a>
       <nav aria-label="Main navigation" className="desktop-nav">
         {links.map(([label, target]) => (
@@ -110,7 +124,7 @@ export function Header() {
           </a>
         ))}
       </nav>
-      <a className="button button-dark header-cta" href="#contact">
+      <a className="header-cta" href="#contact">
         Let’s talk <Arrow diagonal />
       </a>
       <button
