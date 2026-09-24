@@ -339,128 +339,6 @@ h2 em {
   font-size: 17px;
   letter-spacing: -0.25px;
 }
-.projects-section {
-  background: var(--soft);
-}
-.projects-inner {
-  padding-top: 95px;
-  padding-bottom: 70px;
-}
-.project-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 1fr 1fr;
-  gap: 28px;
-  align-items: start;
-}
-.project-card {
-  display: block;
-  background: transparent;
-  border: 0;
-  padding: 0;
-  text-align: left;
-  color: inherit;
-  width: 100%;
-}
-.project-card-2 {
-  margin-top: 70px;
-}
-.project-card-3 {
-  margin-top: 135px;
-}
-.project-photo {
-  position: relative;
-  aspect-ratio: 0.77;
-  overflow: hidden;
-  border-radius: 3px;
-  background: #d6c9b6;
-}
-.project-photo img {
-  object-fit: cover;
-  transition: transform 0.7s;
-}
-.project-card:hover img {
-  transform: scale(1.045);
-}
-.project-index {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  color: white;
-  font-size: 11.5px;
-  letter-spacing: 1px;
-  background: #29241e35;
-  border: 1px solid #fff5;
-  border-radius: 50%;
-  width: 31px;
-  height: 31px;
-  display: grid;
-  place-items: center;
-}
-.project-view {
-  position: absolute;
-  bottom: 18px;
-  left: 18px;
-  right: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--paper);
-  padding: 14px 18px;
-  border-radius: 40px;
-  font-size: 13.5px;
-  transform: translateY(80px);
-  opacity: 0;
-  transition:
-    transform 0.35s,
-    opacity 0.35s;
-}
-.project-card:hover .project-view,
-.project-card:focus-visible .project-view {
-  transform: translateY(0);
-  opacity: 1;
-}
-.project-caption {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 22px;
-}
-.project-caption .eyebrow {
-  font-size: 10.5px;
-  letter-spacing: 1.5px;
-  color: var(--muted);
-  margin-bottom: 9px;
-}
-.project-caption h3 {
-  font-size: 21px;
-  font-weight: 400;
-  letter-spacing: -0.6px;
-}
-.project-caption .round-arrow {
-  width: 36px;
-  height: 36px;
-  border-color: #cfc8bb;
-  flex-shrink: 0;
-}
-.project-card:hover .round-arrow {
-  background: var(--ink);
-  color: var(--paper);
-}
-.projects-footnote {
-  margin-top: 50px;
-  padding-top: 25px;
-  border-top: 1px solid #d6d0c4;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
-.projects-footnote > span {
-  font-size: 10.5px;
-  letter-spacing: 1px;
-  color: var(--muted);
-}
 .text-link {
   display: inline-flex;
   align-items: center;
@@ -535,12 +413,6 @@ h2 em {
   text-transform: uppercase;
   color: var(--accent);
 }
-.service-thumb {
-  display: none;
-}
-.service-thumb img {
-  object-fit: cover;
-}
 .service-arrow {
   justify-self: end;
   display: grid;
@@ -581,31 +453,6 @@ h2 em {
   color: var(--paper);
   transform: rotate(45deg);
 }
-.service-preview {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 40;
-  width: 300px;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  border-radius: 3px;
-  pointer-events: none;
-  opacity: 0;
-  box-shadow: 0 30px 60px -20px #302b2666;
-}
-.service-preview-img {
-  position: absolute;
-  inset: 0;
-}
-.service-preview-img img {
-  object-fit: cover;
-}
-@media (hover: none), (pointer: coarse) {
-  .service-preview {
-    display: none;
-  }
-}
 @media (max-width: 1050px) {
   .service-row {
     grid-template-columns: 50px minmax(0, 1fr) minmax(0, 1.2fr) 44px;
@@ -621,8 +468,7 @@ h2 em {
     grid-template-columns: 40px minmax(0, 1fr) 44px;
     grid-template-areas:
       "num title arrow"
-      ". body body"
-      ". thumb thumb";
+      ". body body";
     row-gap: 18px;
     align-items: start;
     padding: 32px 0;
@@ -640,15 +486,6 @@ h2 em {
   }
   .service-arrow {
     grid-area: arrow;
-  }
-  .service-thumb {
-    grid-area: thumb;
-    display: block;
-    position: relative;
-    aspect-ratio: 16 / 10;
-    overflow: hidden;
-    border-radius: 3px;
-    margin-top: 6px;
   }
   .service-row::before {
     inset: 0 -12px;
@@ -835,23 +672,6 @@ h2 em {
   font-size: 9.5px;
   letter-spacing: 1.3px;
 }
-.project-dialog {
-  padding: 0;
-  border: 0;
-  border-radius: 5px;
-  background: var(--paper);
-  color: var(--ink);
-  width: min(1000px, 90vw);
-  max-height: 88svh;
-  position: fixed;
-  inset: 0;
-  margin: auto;
-  overscroll-behavior: contain;
-}
-.project-dialog::backdrop {
-  background: #201b15ba;
-  backdrop-filter: blur(5px);
-}
 .dialog-close {
   position: absolute;
   top: 15px;
@@ -916,9 +736,6 @@ h2 em {
   gap: 14px;
   margin-top: 15px;
 }
-.project-dialog[open] {
-  animation: dialog-enter 0.25s ease;
-}
 body:has(dialog[open]) {
   overflow: hidden;
 }
@@ -963,16 +780,6 @@ body:has(dialog[open]) {
   .studio-mini-image > span {
     left: 160px;
   }
-  .project-grid {
-    gap: 20px;
-  }
-  .project-caption h3 {
-    font-size: 18px;
-  }
-  .project-caption .round-arrow {
-    width: 30px;
-    height: 30px;
-  }
   .process-step {
     padding: 0 20px;
   }
@@ -1000,22 +807,6 @@ body:has(dialog[open]) {
   }
   .principles > div {
     gap: 15px;
-  }
-  .project-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
-  }
-  .project-card-2 {
-    margin-top: 50px;
-  }
-  .project-card-3 {
-    margin-top: 0;
-    grid-column: 1 / -1;
-    width: 50%;
-    max-width: 390px;
-  }
-  .project-photo {
-    aspect-ratio: 0.9;
   }
   .section-heading h2 {
     font-size: 38px;
@@ -1105,42 +896,6 @@ body:has(dialog[open]) {
     font-size: 17px;
     margin-top: 22px;
   }
-  .project-grid {
-    grid-template-columns: 1fr;
-    gap: 38px;
-  }
-  .project-card-2,
-  .project-card-3 {
-    margin: 0;
-    width: 100%;
-    max-width: none;
-    grid-column: auto;
-  }
-  .project-photo {
-    aspect-ratio: 0.94;
-  }
-  .project-caption h3 {
-    font-size: 22px;
-  }
-  .project-caption .round-arrow {
-    height: 38px;
-    width: 38px;
-  }
-  .project-view {
-    display: none;
-  }
-  .projects-footnote {
-    margin-top: 35px;
-    display: block;
-  }
-  .projects-footnote > span {
-    font-size: 9.5px;
-    line-height: 1.8;
-    display: block;
-  }
-  .projects-footnote .text-link {
-    margin-top: 22px;
-  }
   .process-section .section {
     padding: 70px 25px;
   }
@@ -1227,10 +982,6 @@ body:has(dialog[open]) {
   .footer-bottom a {
     margin-left: auto;
   }
-  .project-dialog {
-    width: 92vw;
-    max-height: 90svh;
-  }
   .dialog-layout {
     grid-template-columns: 1fr;
   }
@@ -1284,23 +1035,10 @@ body:has(dialog[open]) {
   width: fit-content;
 }
 .brand-logo {
-  width: 32px;
-  height: 40px;
+  width: 225px;
+  height: auto;
   object-fit: contain;
   flex-shrink: 0;
-}
-.brand-name {
-  font-size: 25px;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.8px;
-}
-.brand-descriptor {
-  display: block;
-  font-size: 7px;
-  font-weight: 400;
-  letter-spacing: 2.2px;
-  margin-top: 6px;
 }
 .site-header {
   position: absolute;
@@ -1491,13 +1229,6 @@ body:has(dialog[open]) {
   .header-cta {
     font-size: 14.5px;
   }
-  .brand-name {
-    font-size: 21px;
-  }
-  .brand-descriptor {
-    font-size: 6px;
-    letter-spacing: 1.9px;
-  }
   .hero h1,
   .hero h1 em {
     letter-spacing: -3px;
@@ -1605,17 +1336,8 @@ body:has(dialog[open]) {
     gap: 9px;
   }
   .brand-logo {
-    width: 27px;
-    height: 34px;
-  }
-  .brand-name {
-    font-size: 20px;
-    letter-spacing: -0.5px;
-  }
-  .brand-descriptor {
-    font-size: 6px;
-    letter-spacing: 1.8px;
-    margin-top: 5px;
+    width: 175px;
+    height: auto;
   }
   .hero {
     min-height: max(700px, 100svh);
@@ -2357,7 +2079,8 @@ h3 em {
 }
 .field select {
   cursor: pointer;
-  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+  background-image:
+    linear-gradient(45deg, transparent 50%, currentColor 50%),
     linear-gradient(135deg, currentColor 50%, transparent 50%);
   background-position:
     calc(100% - 12px) 50%,
@@ -2587,5 +2310,23 @@ h3 em {
   }
   .enquiry-form legend {
     font-size: 21px;
+  }
+}
+
+/* The supplied full-colour mark needs a light field over photographic heroes. */
+.site-header .brand {
+  background: rgba(247, 245, 239, 0.96);
+  border-radius: 3px;
+  padding: 8px 10px;
+}
+.footer .brand-logo {
+  width: 225px;
+}
+@media (max-width: 650px) {
+  .site-header .brand {
+    padding: 6px 7px;
+  }
+  .footer .brand-logo {
+    width: 195px;
   }
 }

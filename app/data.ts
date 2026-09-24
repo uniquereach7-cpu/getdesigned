@@ -13,7 +13,6 @@ export const contact = {
 };
 
 export const navLinks = [
-  { label: "Our work", href: "/#projects" },
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Contact", href: "/contact" },
@@ -47,7 +46,8 @@ export const services = [
     tags: ["Homes", "Materials", "Bespoke furniture"],
     image: "/images/swing.png",
     alt: "Custom cane and timber swing in a residential interior",
-    intro: "Luxury that reflects your personality, at a price that makes sense.",
+    intro:
+      "Luxury that reflects your personality, at a price that makes sense.",
     detail:
       "From apartments to independent homes, we design turnkey interiors that carry your taste through every room. Our designers and in-house craftsmen work together on carpentry, lighting, and finishes so the details you see in the drawings are the details you live with.",
     includes: [

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Arrow, Header, Motion, ProjectGallery, Services } from "./experience";
+import { Arrow, Header, Motion, Services } from "./experience";
 import { ClosingCTA, ProcessSteps } from "./site";
 
 export default function Home() {
@@ -35,9 +35,9 @@ export default function Home() {
             <p className="hero-description">
               A reason behind every detail. A place for the way you live.
             </p>
-            <a href="#projects" className="button button-light">
-              Explore our work <Arrow diagonal />
-            </a>
+            <Link href="/services" className="button button-light">
+              Explore our services <Arrow diagonal />
+            </Link>
           </div>
           <div className="hero-bottom">
             <a href="#studio" className="scroll-link">
@@ -136,36 +136,10 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="projects-section" id="projects">
-          <div className="section projects-inner">
-            <div className="section-label" data-reveal>
-              <span className="tiny-dot" /> A FEW SPACES, MANY STORIES{" "}
-              <span className="section-number">02 / SELECTED WORK</span>
-            </div>
-            <div className="section-heading" data-reveal>
-              <h2>
-                Spaces with <em>a point of view.</em>
-              </h2>
-              <p>
-                A closer look at our work, and the
-                <br />
-                little details that make it personal.
-              </p>
-            </div>
-            <ProjectGallery />
-            <div className="projects-footnote">
-              <span>REAL SPACES. REAL DETAILS. THE GETDESIGNED PORTFOLIO.</span>
-              <Link href="/lets-talk" className="text-link">
-                Your space could be next <Arrow diagonal />
-              </Link>
-            </div>
-          </div>
-        </section>
-
         <section className="section services-section" id="services">
           <div className="section-label" data-reveal>
             <span className="tiny-dot" /> FROM POSSIBILITIES TO PLACES{" "}
-            <span className="section-number">03 / OUR EXPERTISE</span>
+            <span className="section-number">02 / OUR EXPERTISE</span>
           </div>
           <div className="section-heading" data-reveal>
             <h2>
@@ -181,7 +155,9 @@ export default function Home() {
           </div>
           <Services />
           <div className="services-footnote" data-reveal>
-            <span>EVERY DECISION, EXPLAINED. EVERY SPACE, PLANNED FOR YOU.</span>
+            <span>
+              EVERY DECISION, EXPLAINED. EVERY SPACE, PLANNED FOR YOU.
+            </span>
             <Link href="/services" className="text-link">
               Explore our services <Arrow diagonal />
             </Link>
@@ -192,7 +168,7 @@ export default function Home() {
           <div className="section">
             <div className="section-label" data-reveal>
               <span className="tiny-dot" /> GOOD DESIGN IS A CONVERSATION{" "}
-              <span className="section-number">04 / THE PROCESS</span>
+              <span className="section-number">03 / THE PROCESS</span>
             </div>
             <div className="section-heading" data-reveal>
               <h2>

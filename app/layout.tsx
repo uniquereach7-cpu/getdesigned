@@ -4,7 +4,10 @@ import "./globals.css";
 import { Footer } from "./site";
 
 export const metadata: Metadata = {
-  icons: { icon: "/assets/logo.png", apple: "/assets/logo.png" },
+  icons: {
+    icon: "/assets/new Get designed logo.png",
+    apple: "/assets/new Get designed logo.png",
+  },
   title: {
     default: "GetDesigned — Thoughtful Interiors, Hyderabad",
     template: "%s — GetDesigned",

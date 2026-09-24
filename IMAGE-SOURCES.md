@@ -25,7 +25,7 @@ Project titles are editorial descriptions, not verified client/project names. De
 
 ## Revised hero concept
 
-- `public/images/hero-architecture.webp`: created with the built-in image-generation tool for this website. This is an architectural concept image, not a completed GetDesigned project. The supplied `public/assets/logo.png` is used directly, without recolouring or redrawing, in the header and footer and as the site icon.
+- `public/images/hero-architecture.webp`: created with the built-in image-generation tool for this website. This is an architectural concept image, not a completed GetDesigned project. The supplied `public/assets/new Get designed logo.png` is used directly, without recolouring or redrawing, in the header and footer and as the site icon.
 
 Generation prompt:
 
