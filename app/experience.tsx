@@ -232,16 +232,13 @@ export function Testimonials() {
         <span className="tiny-dot" /> A PLACE FOR CLIENT STORIES
         <span className="section-number">04 / TESTIMONIALS</span>
       </div>
-      <h2 id="testimonials-title">The spaces we make. <em>The stories they hold.</em></h2>
+      <h2 id="testimonials-title">Spaces made for living. <em>Stories worth sharing.</em></h2>
       <p className="testimonial-disclosure">
         Sample testimonials for layout preview. Replace with approved client feedback before publishing.
       </p>
       <div className="testimonial-layout">
-        <div className="testimonial-symbol" aria-hidden="true">
-          <span>“</span>
-          <small>THOUGHTFULLY DESIGNED · PERSONALLY FELT</small>
-        </div>
         <div className="testimonial-main">
+          <span className="testimonial-opening-mark" aria-hidden="true">“</span>
           <div className="testimonial-quote" aria-live="polite" key={active}>
             <blockquote>{testimonial.quote}</blockquote>
             <div className="testimonial-person">
