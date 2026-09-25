@@ -92,7 +92,7 @@ export function Brand() {
   );
 }
 
-export function Header() {
+export function Header({ light = false }: { light?: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
@@ -108,7 +108,7 @@ export function Header() {
     return () => window.removeEventListener("keydown", onEscape);
   }, [menuOpen]);
   return (
-    <header className={`site-header ${menuOpen ? "menu-is-open" : ""}`}>
+    <header className={`site-header ${light ? "header-on-light" : ""} ${menuOpen ? "menu-is-open" : ""}`}>
       <Link
         href="/"
         className="brand"
@@ -160,7 +160,7 @@ export function Header() {
           </Link>
         ))}
         <Link href="/lets-talk" onClick={() => setMenuOpen(false)}>
-          <span>04</span>Let’s talk
+          <span>05</span>Let’s talk
           <Arrow diagonal />
         </Link>
       </nav>
@@ -170,23 +170,104 @@ export function Header() {
 
 export function Services() {
   return (
-    <ul className="service-list">
+    <div className="service-cards">
       {services.map((service, index) => (
-        <li key={service.name} className="service-item" data-reveal>
-          <Link href={`/services#${service.id}`} className="service-row">
-            <span className="service-number">0{index + 1}</span>
-            <h3 className="service-title">{service.name}</h3>
-            <div className="service-body">
-              <p>{service.description}</p>
-              <p className="service-tags">{service.tags.join(" · ")}</p>
-            </div>
-            <span className="service-arrow" aria-hidden="true">
-              <Arrow diagonal />
-            </span>
-          </Link>
-        </li>
+        <article key={service.id} className="service-card" data-reveal>
+          <div className="service-card-copy">
+            <span className="service-card-number">0{index + 1} / WHAT WE DO</span>
+            <h3>{service.name}</h3>
+            <p>{service.description}</p>
+            <span className="service-card-tags">{service.tags.join(" · ")}</span>
+            <Link href={`/services#${service.id}`} className="service-card-link">
+              Explore service <Arrow />
+            </Link>
+          </div>
+          <div className="service-card-image">
+            <Image
+              src={service.image}
+              alt={service.alt}
+              fill
+              sizes="(max-width: 900px) 100vw, 45vw"
+            />
+          </div>
+        </article>
       ))}
-    </ul>
+    </div>
+  );
+}
+
+const testimonials = [
+  {
+    quote:
+      "We wanted a home that felt calm without losing the energy of family life. The planning questions helped us see possibilities we had missed, and every choice had a clear reason.",
+    name: "Ananya Sharma",
+    project: "Home interior · Hyderabad",
+  },
+  {
+    quote:
+      "The team considered how we actually use each room. Storage, light, and movement were thought through together, so the design feels easy to live with every day.",
+    name: "Rohan & Priya Mehta",
+    project: "Residential space · Hyderabad",
+  },
+  {
+    quote:
+      "What stood out was the conversation. We understood why a layout changed and how each material would work for us before anything was finalised.",
+    name: "Kavya Rao",
+    project: "Apartment interior · Hyderabad",
+  },
+];
+
+export function Testimonials() {
+  const [active, setActive] = useState(0);
+  const testimonial = testimonials[active];
+  const move = (direction: number) => {
+    setActive((current) =>
+      (current + direction + testimonials.length) % testimonials.length,
+    );
+  };
+
+  return (
+    <section className="section testimonials-section" aria-labelledby="testimonials-title">
+      <div className="section-label">
+        <span className="tiny-dot" /> A PLACE FOR CLIENT STORIES
+        <span className="section-number">04 / TESTIMONIALS</span>
+      </div>
+      <h2 id="testimonials-title">The spaces we make. <em>The stories they hold.</em></h2>
+      <p className="testimonial-disclosure">
+        Sample testimonials for layout preview. Replace with approved client feedback before publishing.
+      </p>
+      <div className="testimonial-layout">
+        <div className="testimonial-symbol" aria-hidden="true">
+          <span>“</span>
+          <small>THOUGHTFULLY DESIGNED · PERSONALLY FELT</small>
+        </div>
+        <div className="testimonial-main">
+          <div className="testimonial-quote" aria-live="polite" key={active}>
+            <blockquote>{testimonial.quote}</blockquote>
+            <div className="testimonial-person">
+              <span className="testimonial-monogram" aria-hidden="true">
+                {testimonial.name.split(/\s|&/).filter(Boolean).map((part) => part[0]).slice(0, 2).join("")}
+              </span>
+              <div>
+                <strong>{testimonial.name}</strong>
+                <span>{testimonial.project} · Illustrative quote</span>
+              </div>
+            </div>
+          </div>
+          <div className="testimonial-controls">
+            <span>{String(active + 1).padStart(2, "0")} / {String(testimonials.length).padStart(2, "0")}</span>
+            <div>
+              <button type="button" onClick={() => move(-1)} aria-label="Previous testimonial">
+                <Arrow />
+              </button>
+              <button type="button" onClick={() => move(1)} aria-label="Next testimonial">
+                <Arrow />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 

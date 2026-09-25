@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Arrow, Header, Motion, Services } from "./experience";
+import { Arrow, Header, Motion, Services, Testimonials } from "./experience";
 import { ClosingCTA, ProcessSteps } from "./site";
 
 export default function Home() {
@@ -48,90 +48,51 @@ export default function Home() {
             </span>
           </div>
         </section>
-        <div className="belief-strip">
-          <span>Considered spaces. Meaningful details.</span>
-          <span>
-            Designed around <em>you.</em>
-          </span>
-          <span>FROM THE FIRST SKETCH TO THE FINAL TOUCH.</span>
+        <div className="belief-strip" aria-label="Thoughtful spaces, planned around you">
+          <div className="belief-track">
+            {[0, 1].map((copy) => (
+              <div className="belief-phrases" key={copy} aria-hidden={copy === 1}>
+                <span>Thoughtful spaces</span>
+                <span>Purpose in every detail</span>
+                <span>Designed around you</span>
+                <span>From plan to place</span>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <section className="section studio-section" id="studio">
-          <div className="section-label" data-reveal>
-            <span className="tiny-dot" /> THE WAY WE SEE IT{" "}
-            <span className="section-number">01 / THE STUDIO</span>
-          </div>
-          <div className="studio-grid">
-            <div data-reveal>
-              <h2>
-                Not just a beautiful space.
-                <br />A <em>better way to live.</em>
-              </h2>
-              <div className="studio-mini-image">
-                <Image
-                  src="/images/living.png"
-                  alt="A warmly lit stone niche from GetDesigned’s portfolio"
-                  fill
-                  sizes="180px"
-                />
-                <span>
-                  It’s all in
-                  <br />
-                  <em>the details.</em>
-                </span>
-              </div>
+        <section className="home-founder-section" id="studio">
+          <div className="section founder-layout">
+            <div className="founder-portrait" data-reveal>
+              <Image
+                src="/images/founder.jpg"
+                alt="Samanvita Reddy, founder of GetDesigned"
+                fill
+                sizes="(max-width: 900px) 90vw, 40vw"
+              />
             </div>
-            <div className="studio-copy" data-reveal>
-              <p className="lead">
-                The best spaces don’t happen by chance.
-                <br />
-                They begin with the right questions.
+            <div className="founder-copy" data-reveal>
+              <div className="section-label">
+                <span className="tiny-dot" /> THE PERSON BEHIND THE PLANS
+                <span className="section-number">01 / THE FOUNDER</span>
+              </div>
+              <h2>Samanvita <em>Reddy.</em></h2>
+              <p className="founder-role">CEO &amp; Founder</p>
+              <p className="founder-intro">
+                Every space deserves its own answer, not a borrowed template.
               </p>
               <p>
-                How do you start your mornings? Where does everyone gather? What
-                would make your everyday feel a little easier?
+                Samanvita begins by listening: how you move through a room, what
+                your day asks of it, and where a small change could make life
+                easier. From there, every layout and detail has a reason.
               </p>
               <p>
-                At GetDesigned, we look beyond a floor plan. We get to know the
-                people who will live in it. Then we shape the light, the flow,
-                and every little detail around them. Nothing generic. Nothing
-                without a reason.
+                Her approach brings considered planning and a personal sense of
+                luxury together, so the finished space feels unmistakably yours.
               </p>
-              <div className="founder">
-                <div className="founder-photo">
-                  <Image
-                    src="/images/founder.jpg"
-                    alt="Samanvita Reddy, founder of GetDesigned"
-                    fill
-                    sizes="60px"
-                  />
-                </div>
-                <div>
-                  <strong>Samanvita Reddy</strong>
-                  <span>Founder & CEO</span>
-                </div>
-                <Link
-                  href="/about"
-                  className="round-arrow"
-                  aria-label="More about the studio"
-                >
-                  <Arrow diagonal />
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div className="principles" data-reveal>
-            <div>
-              <span>01</span>
-              <p>People before plans.</p>
-            </div>
-            <div>
-              <span>02</span>
-              <p>Purpose in every detail.</p>
-            </div>
-            <div>
-              <span>03</span>
-              <p>Beauty that belongs.</p>
+              <Link href="/about#founder" className="text-link">
+                Get to know the studio <Arrow diagonal />
+              </Link>
             </div>
           </div>
         </section>
@@ -185,6 +146,8 @@ export default function Home() {
             <ProcessSteps />
           </div>
         </section>
+
+        <Testimonials />
 
         <ClosingCTA />
       </main>

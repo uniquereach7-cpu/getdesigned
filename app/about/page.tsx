@@ -138,7 +138,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="founder-section">
+        <section className="founder-section" id="founder">
           <div className="section founder-layout">
             <div className="founder-portrait" data-reveal>
               <Image
